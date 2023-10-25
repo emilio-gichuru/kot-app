@@ -22,15 +22,18 @@ class MainActivity : AppCompatActivity() {
 
 
         navigateButton.setOnClickListener {
-            Toast.makeText(
-                this,
-                "Hello ${firstName.text.toString()} ${lastName.text.toString()}",
-                Toast.LENGTH_LONG
-            ).show();
-            var intent = Intent(this, Second::class.java);
-            intent.putExtra("firstName", firstName.text.toString());
-            intent.putExtra("lastName", lastName.text.toString());
-            startActivity(intent);
+            if (firstName.text.toString().isEmpty() ) {
+                firstName.setError("Please enter your first name");
+
+            } else if(lastName.text.toString().isEmpty()){
+                lastName.setError("Please enter your last name");
+            }
+            else {
+                var intent = Intent(this, Second::class.java);
+                intent.putExtra("firstName", firstName.text.toString());
+                intent.putExtra("lastName", lastName.text.toString());
+                startActivity(intent);
+            }
         }
     }
 }
